@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>ReactJS</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+    const Form = {
+      Input() {
+        return <input />
+      },
+      Checkbox() {
+        return <input type="checkbox" />
+      }
+    }
+
+    function App() {
+      const type = "Input";
+      const Component = Form[type];
+      return (
+        <div id="wrapper">
+          <Component />
+        </div>
+      )
+    }
+    
+    // index.js
+    const rootContainer = ReactDOM.createRoot(document.getElementById('root'));
+    rootContainer.render(<App />);
+
+  </script>
+</body>
+</html>

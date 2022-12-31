@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>ReactJS</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    // PostItem.js
+    function PostItem(props) {
+      console.log(props);
+      return (
+        <div className="post-item">
+          <h2 className="post-title">{props.title}</h2>
+          <p className="post-desc">{props.desc}</p>
+          <p className="post-published">{props.published}</p>
+        </div>
+      )
+    }
+
+    // App.js
+    function App() {
+      return (
+        <div id="wrapper">
+          <PostItem
+            title="Learn React"
+            desc="Do you know javascript?"
+            published="A day ago"
+          />
+          <PostItem
+            title="Learn NodeJS"
+            desc="Do you know node?"
+            published="2 weeks ago"
+          />
+        </div>
+      )
+    }
+    
+    // index.js
+    const root = document.getElementById('root');
+    const rootContainer = ReactDOM.createRoot(root);
+    rootContainer.render(<App />);
+
+  </script>
+</body>
+</html>

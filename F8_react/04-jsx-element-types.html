@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>ReactJS</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    // React element types: string, function/class
+    function Header() {
+      return (
+        <h1>Header</h1>
+      )
+    }
+
+    class Footer extends React.Component {
+      render() {
+        return (
+          <div className="footer">Footer</div>
+        )
+      }
+    }
+    
+    const app = (
+      <div className="wrapper">
+        <Header />
+        <div className="content">Content</div>
+        <Footer />
+      </div>
+    )
+    
+    const root = document.getElementById('root');
+    const rootContainer = ReactDOM.createRoot(root);
+    rootContainer.render(app);
+
+  </script>
+</body>
+</html>

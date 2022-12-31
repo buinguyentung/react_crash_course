@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>ReactJS</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+</head>
+
+<body>
+  <h1 id="heading">I am Tung</h1>
+  <div id="root"></div>
+  <script>
+    const h1 = document.querySelector('#heading');
+    console.log(h1);
+    
+    const h2 = document.createElement('h2');
+    h2.innerText = "Hi guys";
+    console.log(h2);
+    document.body.appendChild(h2);
+
+    const root = document.getElementById('root');
+    const h3 = document.createElement('h3');
+    h3.innerText = "Have a good day!";
+    h3.style = 'color: green; font-size: 20px'
+    root.appendChild(h3);
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>ReactJS</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    // JSX instead of React.createElement
+    /*
+      <ul>
+        <li>Javascrip</li>
+        <li>ReactJS</li>
+      </ul>      
+    */
+    const reactCourse = "Learn React"
+    const ul = <ul>
+      <li style={{color: 'red'}}>JavaScript</li>
+      <li>{reactCourse}</li>
+    </ul>
+    console.log(ul);
+
+    // Get root element
+    const root = document.getElementById('root');
+
+    // React-DOM@18
+    const rootContainer = ReactDOM.createRoot(root);
+    rootContainer.render(ul);
+
+    // Render Arrays
+    const courses = [
+      { name: "HTML, CSS" },
+      { name: "JavaScript" },
+      { name: "ReactJS" },
+    ]
+
+    // React.createElement: Render Arrays
+    let elements = [];
+    for (let i = 0; i < courses.length; i++) {
+      elements.push(React.createElement('li', null, courses[i].name));
+    }
+    const ul2 = React.createElement('ul', null, elements);
+    // console.log(ul2);
+    // rootContainer.render(ul2);
+
+    // JSX: Render Arrays
+    const ul3 = (
+      <ul>
+        {courses.map(course => 
+          <li style={{color: 'green'}}>{course.name}</li>)}
+      </ul>
+    )
+    rootContainer.render(ul3);
+  </script>
+</body>
+</html>
