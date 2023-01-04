@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>ReactJS</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+    class App extends React.Component {
+      // Mounting
+      constructor(props) {
+        super(props);
+        this.state = {favoritecolor: "red"};
+        console.log("constructor: " + this.state.favoritecolor);
+      }
+
+      // NOTE: this function will be invoked when state change,
+      // and it sets the favorite color due to the props
+      // hence the setState() will not be implemented.
+      // static getDerivedStateFromProps(props, state) {
+      //   console.log("getDerivedStateFromProps: " + props.favcol);
+      //   return {favoritecolor: props.favcol};
+      // }
+
+      render() {
+        return (
+          <div id="wrapper">
+            <h1 id="h1">My favorite color is {this.state.favoritecolor}</h1>
+          </div>
+        )
+      }
+
+      componentDidMount() {
+        setTimeout(() => {
+          this.setState({favoritecolor: "green"});
+          console.log("componentDidMount: change to green");
+        }, 2000)
+      }
+
+      shouldComponentUpdate() {
+        return true;
+      }
+
+      componentDidUpdate() {
+        document.getElementById("h1").innerText = 
+          "The updated favorite color is " + this.state.favoritecolor;
+      }
+    }
+    
+    // index.js
+    const rootContainer = ReactDOM.createRoot(document.getElementById('root'));
+    rootContainer.render(<App favcol="yellow"/>);
+
+  </script>
+</body>
+</html>
