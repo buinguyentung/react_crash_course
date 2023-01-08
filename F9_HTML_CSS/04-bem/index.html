@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <link rel="stylesheet" href="./assets/css/all.min.css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+  <div id="toast">
+    <!-- Success -->
+    <!-- <div class="toast toast--success">
+      <div class="toast__icon">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <div class="toast__body">
+        <h3 class="toast__title">Success</h3>
+        <p class="toast__msg">Congratulation! You have made it!</p>
+      </div>
+      <div class="toast__close">
+        <i class="fa-regular fa-circle-xmark"></i>
+      </div>
+    </div> -->
+
+    <!-- Warning -->
+    <!-- <div class="toast toast--warning">
+      <div class="toast__icon">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <div class="toast__body">
+        <h3 class="toast__title">Warning</h3>
+        <p class="toast__msg">Watchout! Everything looks fine, but you need to re-check carefully!</p>
+      </div>
+      <div class="toast__close">
+        <i class="fa-regular fa-circle-xmark"></i>
+      </div>
+    </div> -->
+
+    <!-- Error -->
+    <!-- <div class="toast toast--error">
+      <div class="toast__icon">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <div class="toast__body">
+        <h3 class="toast__title">Error</h3>
+        <p class="toast__msg">Something went wrong!</p>
+      </div>
+      <div class="toast__close">
+        <i class="fa-regular fa-circle-xmark"></i>
+      </div>
+    </div> -->
+  </div>
+
+  <div>
+    <div class="btn btn--success" onclick="showSuccessToast()">Show success</div>
+    <div class="btn btn--warning" onclick="showWarningToast()">Show warning</div>
+    <div class="btn btn--error" onclick="showErrorToast()">Show error</div>
+  </div>
+
+  <script>
+    function toast({title = '', message = '', type = 'success', duration = 3000}) {
+      console.log('message: ', message);
+      console.log('duration: ', duration);
+      const main = document.getElementById('toast');
+
+      if (main) {
+        const toast = document.createElement('div');
+
+        // auto remove toast
+        const autoRemoveId = setTimeout(() => {
+          main.removeChild(toast);
+        }, duration + 1000);
+
+        toast.onclick = (e) => {
+          if (e.target.closest('.toast__close')) {
+            main.removeChild(toast);
+            clearTimeout(autoRemoveId);
+          }
+        }
+
+        const icons = {
+          success: 'fas fa-check-circle',
+          warning: 'fas fa-exclamation-circle',
+          error: 'fas fa-exclamation-circle',
+        }
+        const delay = (duration / 1000).toFixed(2);
+
+        toast.classList.add('toast');
+        toast.classList.add('toast--' + type);
+        toast.style.animation = `animation: slideInLeft ease .3s, fadeOut linear 1s ${delay}s forwards;`
+        toast.innerHTML = `
+          <div class="toast__icon">
+            <i class="${icons[type]}"></i>
+          </div>
+          <div class="toast__body">
+            <h3 class="toast__title">${title}</h3>
+            <p class="toast__msg">${message}</p>
+          </div>
+          <div class="toast__close">
+            <i class="fa-regular fa-circle-xmark"></i>
+          </div>
+          `;
+        main.appendChild(toast);
+      }
+    }
+
+    function showSuccessToast() {
+      toast({
+        title: 'Success',
+        message: 'Congratulation! You have made it!',
+        type: 'success',
+        duration: 5000
+      });
+    }
+
+    function showWarningToast() {
+      toast({
+        title: 'Warning',
+        message: 'Watchout! Everything looks fine, but you need to re-check carefully!',
+        type: 'warning',
+        duration: 5000
+      });
+    }
+
+    function showErrorToast() {
+      toast({
+        title: 'Error',
+        message: 'Something went wrong!',
+        type: 'error',
+        duration: 5000
+      });
+    }
+  </script>
+</body>
+</html>

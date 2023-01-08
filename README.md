@@ -6,6 +6,9 @@ https://reactjs.org/docs/getting-started.html
 https://babeljs.io/setup#installation
 https://github.com/facebook/create-react-app
 
+//============== Font Icons
+https://cdnjs.com/libraries/font-awesome
+https://themify.me/themify-icons
 
 //============== Tools
 1. IDE and extensions
