@@ -4,3 +4,103 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/*
+1. From outside to inside
+2. From top to bottom
+3. From overview to detail
+*/
+
+/*
+1. Position
+2. Size (width, height)
+3. Color
+4. Style (font-size, shape,...)
+*/
+
+#wrapper {
+
+}
+
+#header {
+  height: 46.5px;
+  background-color: #000;
+  position: fixed;  /* Surf on top of other element */
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#nav {
+  
+}
+
+#nav li {
+  display: inline-block;
+  position: relative;
+}
+
+#nav li:hover {
+  color: #000!important;
+  background-color: #ccc!important;
+}
+
+#nav > li > a {
+  color: #fff;
+  text-transform: uppercase;
+}
+
+#nav li a {
+  text-decoration: none;
+  line-height: 46.5px;
+  padding: 0 24px;
+  /* display: inline-block; */
+}
+
+#nav .nav-arrow-down {
+  font-size: 12px;
+}
+
+#nav li:hover .subnav {
+  display: block;
+}
+
+#nav .subnav {
+  display: none;
+  min-width: 160px;
+  position: absolute;
+  top: 46.5px; /* 100% */
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#nav .subnav li {
+  display: block;
+}
+
+#nav .subnav a {
+  color: #000;
+  padding: 0 12px;
+  line-height: 38px;
+}
+
+#slider {
+  margin-top: 46.5px;
+  height: 400px;
+  background-color: #fff;
+}
+
+#content {
+  height: 1000px;
+  background-color: #ccc;
+}
+
+#footer {
+
+}
+
