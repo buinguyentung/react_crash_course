@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import MoviesList from './components/MoviesList';
 import AddMovie from './components/AddMovie';
 import './App.css';
+import useHttp from './hooks/use-http';
 
 function App() {
   // const dummyMovies = [
@@ -20,39 +21,58 @@ function App() {
   //   },
   // ];
   const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [error, setError] = useState(null);
+
+  // Section 15: Practice custom hook useHttp()
+  const transformMovies = (moviesObj) => {
+    const transformedMovies = moviesObj.results.map((movie) => {
+      return {
+        id: movie.episode_id,
+        title: movie.title,
+        openingText: movie.opening_crawl,
+        releaseDate: movie.release_date,
+      };
+    });
+    setMovies(transformedMovies);
+  };
+
+  const {
+    isLoading,
+    error,
+    sendRequest: fetchMoviesHandler,
+  } = useHttp({ url: 'https://swapi.dev/api/films/' }, transformMovies);
 
   useEffect(() => {
     fetchMoviesHandler();
   }, []);
 
-  function fetchMoviesHandler() {
-    setIsLoading(true);
-    setError(null);
-    fetch('https://swapi.dev/api/films/')
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        const transformedMovies = data.results.map((movie) => {
-          return {
-            id: movie.episode_id,
-            title: movie.title,
-            openingText: movie.opening_crawl,
-            releaseDate: movie.release_date,
-          };
-        });
-        setMovies(transformedMovies);
-      })
-      .catch((error) => {
-        console.log('ERROR: ', error);
-        setError(error.message);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }
+  // function fetchMoviesHandler() {
+  //   setIsLoading(true);
+  //   setError(null);
+  //   fetch('https://swapi.dev/api/films/')
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       const transformedMovies = data.results.map((movie) => {
+  //         return {
+  //           id: movie.episode_id,
+  //           title: movie.title,
+  //           openingText: movie.opening_crawl,
+  //           releaseDate: movie.release_date,
+  //         };
+  //       });
+  //       setMovies(transformedMovies);
+  //     })
+  //     .catch((error) => {
+  //       console.log('ERROR: ', error);
+  //       setError(error.message);
+  //     })
+  //     .finally(() => {
+  //       setIsLoading(false);
+  //     });
+  // }
 
   async function addMovieHandler(movie) {
     console.log(movie);
@@ -60,9 +80,9 @@ function App() {
       method: 'POST',
       body: JSON.stringify(movie),
       headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+        'Content-Type': 'application/json',
+      },
+    });
     const data = await response.json();
     console.log(data);
   }
@@ -70,7 +90,7 @@ function App() {
   return (
     <React.Fragment>
       <section>
-        <AddMovie onAddMovie={addMovieHandler}/>
+        <AddMovie onAddMovie={addMovieHandler} />
       </section>
       <section>
         <button onClick={fetchMoviesHandler}>Fetch Movies</button>
